@@ -2,13 +2,20 @@
 
 import 'package:flutter/material.dart';
 
-class AddUserView extends StatelessWidget {
-  const AddUserView({super.key});
+class UpdateUserView extends StatelessWidget {
+  final String userName;
+  final String userEmail;
+
+  const UpdateUserView(
+      {super.key, required this.userName, required this.userEmail});
 
   @override
   Widget build(BuildContext context) {
     TextEditingController _nameEditingController = TextEditingController();
     TextEditingController _emailEditingController = TextEditingController();
+
+    _nameEditingController.text = userName;
+    _emailEditingController.text = userEmail;
 
     return Scaffold(
         body: Center(
@@ -43,8 +50,8 @@ class AddUserView extends StatelessWidget {
                       Navigator.pop(context, {"name": name, "email": email});
                     }
                   },
-                  icon: const Icon(Icons.add),
-                  label: const Text("Add"))
+                  icon: const Icon(Icons.update),
+                  label: const Text("Update"))
             ],
           ),
         ),
