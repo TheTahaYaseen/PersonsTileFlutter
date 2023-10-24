@@ -22,6 +22,7 @@ class AddUserView extends StatelessWidget {
                 height: 50,
                 child: TextField(
                   controller: _nameEditingController,
+                  decoration: const InputDecoration(hintText: "Name"),
                 ),
               ),
               SizedBox(
@@ -29,6 +30,7 @@ class AddUserView extends StatelessWidget {
                 height: 50,
                 child: TextField(
                   controller: _emailEditingController,
+                  decoration: const InputDecoration(hintText: "Email"),
                 ),
               ),
               const SizedBox(
@@ -36,15 +38,12 @@ class AddUserView extends StatelessWidget {
               ),
               ElevatedButton.icon(
                   onPressed: () {
-                    persons.add(Person(
-                        name: _nameEditingController.text,
-                        email: _emailEditingController.text));
-                    _nameEditingController.text = "";
-                    _emailEditingController.text = "";
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const HomeView()));
+                    String name = _nameEditingController.text.toString();
+                    String email = _emailEditingController.text.toString();
+
+                    if (name.isNotEmpty && email.isNotEmpty) {
+                      Navigator.pop(context, {"name": name, "email": email});
+                    }
                   },
                   icon: const Icon(Icons.add),
                   label: const Text("Add"))
@@ -53,8 +52,7 @@ class AddUserView extends StatelessWidget {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const HomeView()));
+            Navigator.pop(context);
           },
           child: const Icon(Icons.arrow_back),
         ));
