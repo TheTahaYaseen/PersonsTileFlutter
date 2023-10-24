@@ -39,10 +39,8 @@ class _HomeViewState extends State<HomeView> {
                                     userName: persons[index].name,
                                     userEmail: persons[index].email)));
                         if (response != null) {
-                          persons.remove(persons[index]);
-                          persons.add(Person(
-                              name: response["name"],
-                              email: response["email"]));
+                          persons[index] = Person(
+                              name: response["name"], email: response["email"]);
                           setState(() {});
                         }
                       },
